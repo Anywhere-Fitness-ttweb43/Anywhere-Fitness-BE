@@ -11,10 +11,14 @@ public class Classes {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long classid;
 
+
+
     @Column(nullable = false)
+    @Temporal(TemporalType.TIME)
     private String Time;
 
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private String date;
 
     @Column(nullable = false)

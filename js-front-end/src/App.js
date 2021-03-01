@@ -8,9 +8,10 @@ import HomePage from './components/HomePage'
 function App() {
 	return (
 		<div className="App" style={ {padding: 0, margin: 0} }>
-			{/* <Route exact path="/" component={Login} />
-			<ProtectedRoute exact path="/userinfo" component={GetUserInfo} /> */}
-			<HomePage />
+			<Route exact path="/" component={HomePage} />
+			<Route exact path="/login" component={Login} />
+			<ProtectedRoute exact path="/userinfo" component={GetUserInfo} />
+			
 		</div>
 	);
 }

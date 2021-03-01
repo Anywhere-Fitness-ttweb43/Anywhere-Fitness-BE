@@ -5,11 +5,13 @@ import GetUserInfo from "./components/UserInfo";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./components/Register";
 import HomePage from './components/HomePage'
+import AllClasses from './components/AllClasses'
 
 function App() {
 	return (
 		<div className="App" style={ {padding: 0, margin: 0} }>
 			<Route exact path="/" component={HomePage} />
+			<Route exact path="/all" component={AllClasses} />
 			<Route exact path="/login" component={Login} />
 			<ProtectedRoute exact path="/userinfo" component={GetUserInfo} />
 			<Route exact path='/register' component={Register}/>

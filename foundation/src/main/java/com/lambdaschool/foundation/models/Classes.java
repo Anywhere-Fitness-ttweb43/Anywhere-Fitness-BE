@@ -11,14 +11,10 @@ public class Classes {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long classid;
 
-
+    @Column(nullable = false)
+    private String time;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIME)
-    private String Time;
-
-    @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
     private String date;
 
     @Column(nullable = false)
@@ -39,7 +35,7 @@ public class Classes {
     }
 
     public Classes(String time, String date, String duration, String type, String intensity, String location) {
-        Time = time;
+        this.time = time;
         this.date = date;
         this.duration = duration;
         this.type = type;
@@ -56,11 +52,11 @@ public class Classes {
     }
 
     public String getTime() {
-        return Time;
+        return time;
     }
 
     public void setTime(String time) {
-        Time = time;
+        this.time = time;
     }
 
     public String getDate() {

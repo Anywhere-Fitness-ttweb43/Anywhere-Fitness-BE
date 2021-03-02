@@ -1,12 +1,11 @@
 package com.lambdaschool.foundation;
 
 import com.github.javafaker.Faker;
+import com.github.javafaker.service.FakeValues;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
-import com.lambdaschool.foundation.models.Role;
-import com.lambdaschool.foundation.models.User;
-import com.lambdaschool.foundation.models.UserRoles;
-import com.lambdaschool.foundation.models.Useremail;
+import com.lambdaschool.foundation.models.*;
+import com.lambdaschool.foundation.services.ClassService;
 import com.lambdaschool.foundation.services.RoleService;
 import com.lambdaschool.foundation.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +43,9 @@ public class SeedData
      */
     @Autowired
     UserService userService;
+
+    @Autowired
+    ClassService classService;
 
     /**
      * Generates test, seed data for our application
@@ -140,6 +142,39 @@ public class SeedData
                 r2));
         userService.save(u5);
 
+        Classes c1 = new Classes("11",
+                "02/12/21",
+                "60",
+                "Cardio",
+                "7",
+                "Earth");
+        classService.save(c1);
+
+        Classes c2 = new Classes("12",
+                "02/13/21",
+                "40",
+                "Other",
+                "2",
+                "Not Earth");
+        classService.save(c1);
+
+        Classes c3 = new Classes("13",
+                "02/15/21",
+                "60",
+                "Test Type",
+                "3",
+                "Test Planet");
+        classService.save(c1);
+
+        Classes c4 = new Classes("14",
+                "02/18/21",
+                "5",
+                "Wow",
+                "0",
+                "Wow");
+        classService.save(c1);
+
+
         if (false)
         {
             // using JavaFaker create a bunch of regular users
@@ -168,6 +203,27 @@ public class SeedData
                         fakeValuesService.bothify("????##@gmail.com")));
                 userService.save(fakeUser);
             }
+
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

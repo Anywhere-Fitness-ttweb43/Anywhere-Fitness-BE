@@ -52,6 +52,7 @@ const Container = styled.div`
 
 const AllClasses = (props) => {
     const [data, setData] = useState(dummyData)
+    // const { state } = props; // cory, remnant of reducer logic
 
     useEffect(() => {
         axios.get('localhost:2019/classes/all')

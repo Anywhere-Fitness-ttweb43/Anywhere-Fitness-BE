@@ -13,11 +13,11 @@ import { classCreate, classUpdate, classDelete } from './actions/index';
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, initialState);
-	
+
 	return (
 		<div className="App" style={ {padding: 0, margin: 0} }>
 			<Route exact path="/" component={HomePage} />
-			<Route exact path="/all" component={AllClasses} />
+			<Route exact path="/all" component={AllClasses} state={state} />
 			<Route exact path="/search" component={Search} />
 			<Route exact path="/login" component={Login} />
 			<ProtectedRoute exact path="/userinfo" component={GetUserInfo} />

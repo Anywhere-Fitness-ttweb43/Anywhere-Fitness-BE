@@ -1,15 +1,15 @@
 export const CREATE = 'CREATE';
-export const CREATE = 'UPDATE';
-export const CREATE = 'DELETE';
+export const UPDATE = 'UPDATE';
+export const DELETE = 'DELETE';
 
-export const classCreate = (classInfo) => {
-  return({ type:CREATE, payload:classInfo });
+export const classCreate = (newClass) => {
+  return({ type:CREATE, payload:newClass });
 }
 
-export const classUpdate = (classInfo) => {
-  return({ type:UPDATE, payload:classInfo  });
+export const classUpdate = (updateInfo) => {
+  return({ type:UPDATE, payload:updateInfo  });
 }
 
-export const classDelete = (classInfo) => {
-  return({ type:DELETE, payload:classInfo });
+export const classDelete = (classId) => {
+  return({ type:DELETE, payload:classId });
 }

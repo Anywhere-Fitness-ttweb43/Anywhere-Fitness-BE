@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import * as yup from 'yup'
 import searchSchema from '../validation/searchSchema'
+import styled from 'styled-components'
 
 const dummyData = [
     {
@@ -32,6 +33,54 @@ const dummyData = [
         maxRegiter: '10',
     },
 ]
+
+const Container = styled.div`
+    height: 100vh;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`
+const FormContainer = styled.div`
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 3rem;
+    background: linear-gradient(180deg,#5c2e85 -12.68%,#762b85 51.91%,#5c2e85 111.27%);
+    color: #fff;
+    box-shadow: ;
+    border-radius: 8px;
+    form {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        input {
+            border-radius: 4px;
+            border: none;
+            height: 29px;
+        }
+
+        button {
+            background-color: #FCD900;
+        }
+    }
+`
+
+const SearchByContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-left: 10rem;
+    width: 100%;
+`
+
+const ClassCard = styled.div`
+
+`
 
 const Search = (props) => {
     const initialErrors = {
@@ -101,45 +150,51 @@ const Search = (props) => {
     }
 
     return (
-        <>
-            <h1>Search</h1>
-            <form onSubmit={search}>
-                <label>Search By {searchBy}
-                    <select onChange={changeSearchBy} value={searchBy}>
-                        <option name='' value=''>Select</option>
-                        <option name='Time' value='Time'>Time</option>
-                        <option name='Date' value='Date'>Date</option>
-                        <option name='Duration' value='Duration'>Duration</option>
-                        <option name='Type' value='Type'>Type</option>
-                        <option name='Intensity' value='Intensity'>Intensity</option>
-                        <option name='Location' value='Location'>Location</option>
-                    </select>
-                </label>
-                {
-                    searchBy ? 
-                    <>
-                    <input
-                        type='text'
-                        name={`${searchBy}Search`}
-                        placeholder={searchBy}
-                        value={searchTerm}
-                        onChange={changeTerm}
-                    /> 
-                    <button>Search</button>
-                    </>
-                    : null
-                }
-                
-            </form>
-            <div>
+        <Container>
+            <FormContainer>
+                <form onSubmit={search}>
+                    <div>
+                        <h1>Search</h1>
+                        <label>Search By {searchBy}
+                            <select onChange={changeSearchBy} value={searchBy}>
+                                <option name='' value=''>Select</option>
+                                <option name='Time' value='Time'>Time</option>
+                                <option name='Date' value='Date'>Date</option>
+                                <option name='Duration' value='Duration'>Duration</option>
+                                <option name='Type' value='Type'>Type</option>
+                                <option name='Intensity' value='Intensity'>Intensity</option>
+                                <option name='Location' value='Location'>Location</option>
+                            </select>
+                        </label>
+                    </div>
+                    <SearchByContainer>
+                    {
+                        searchBy ? 
+                        <>
+                        <h2>Search By {searchBy}</h2>
+                        <input
+                            type='text'
+                            name={`${searchBy}Search`}
+                            placeholder={searchBy}
+                            value={searchTerm}
+                            onChange={changeTerm}
+                        /> 
+                        <button>Search</button>
+                        </>
+                        : <h2><span role='img' aria-label='search'>🔍</span>Search For Something</h2>
+                    }
+                    </SearchByContainer>
+                    
+                </form>
+            </FormContainer>
+            <ClassCard>
                 <p>{errors.TimeSearch}</p> 
                 <p>{errors.DateSearch}</p> 
                 <p>{errors.DurationSearch}</p> 
                 <p>{errors.TypeSearch}</p>
                 <p>{errors.IntensitySearch}</p> 
                 <p>{errors.LocationSearch}</p>
-            </div>
-
+            </ClassCard>
             {
                 classData.map((data, i) => {
                     return (
@@ -155,7 +210,9 @@ const Search = (props) => {
                     )
                 })
             }
-        </>
+        
+        </Container>
+
     )
 }
 

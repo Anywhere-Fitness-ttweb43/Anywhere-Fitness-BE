@@ -7,10 +7,14 @@ import Register from "./components/Register";
 import HomePage from './components/HomePage'
 import AllClasses from './components/AllClasses'
 import Search from './components/Search'
+import Nav from './components/Nav'
+
 
 function App() {
 	return (
 		<div className="App" style={ {padding: 0, margin: 0} }>
+			<Nav />
+
 			<Route exact path="/" component={HomePage} />
 			<Route exact path="/all" component={AllClasses} />
 			<Route exact path="/search" component={Search} />

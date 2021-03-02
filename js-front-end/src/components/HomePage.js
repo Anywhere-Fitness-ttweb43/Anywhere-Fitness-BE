@@ -91,7 +91,7 @@ const HomePage = () => {
                  shank. Andouille beef tenderloin doner turkey.</p>
                 <div>
                     <Link to='/all'>All Classes</Link>
-                    {/* <Link to='/search'>Search</Link> */}
+                    <Link to='/search'>Search</Link>
                 </div>
             </Container>
             

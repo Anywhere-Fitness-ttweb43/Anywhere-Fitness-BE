@@ -51,7 +51,6 @@ const FormContainer = styled.div`
     padding: 3rem;
     background: linear-gradient(180deg,#5c2e85 -12.68%,#762b85 51.91%,#5c2e85 111.27%);
     color: #fff;
-    box-shadow: ;
     border-radius: 8px;
     form {
         display: flex;
@@ -80,11 +79,31 @@ const SearchByContainer = styled.div`
     flex-direction: column;
     margin-left: 10rem;
     width: 100%;
-`
+`;
 
 const ClassCard = styled.div`
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    height: 50%;
+    width: 30%;
+    background: linear-gradient(180deg,#5c2e85 -12.68%,#762b85 51.91%,#5c2e85 111.27%);
+    margin-top: 3rem;
+    border-radius: 8px;
+    padding: 20px;
+    button {
+        color: #5c2e85;
+        padding: 5px;
+        background-color: #FCD900;
+        border-radius: 4px;
+        border: none;
+        margin-top: 0.5rem;
+        height: 20px;
+    }
+`;
 
-`
 
 const Search = (props) => {
     const initialErrors = {
@@ -98,7 +117,7 @@ const Search = (props) => {
 
     const [searchTerm, setSearchTerm] = useState('')
     const [searchBy, setSearchBy] = useState('')
-    const [classData, setClassData] = useState([])
+    const [classData, setClassData] = useState(dummyData)
     const [errors, setErrors] = useState(initialErrors)
 
     const changeSearchBy = (e) => {
@@ -159,7 +178,7 @@ const Search = (props) => {
                 <form onSubmit={search}>
                     <div>
                         <h1>Search</h1>
-                        <label>Search By {searchBy}
+                        <label>Search By:
                             <select onChange={changeSearchBy} value={searchBy}>
                                 <option name='' value=''>Select</option>
                                 <option name='Time' value='Time'>Time</option>
@@ -172,10 +191,8 @@ const Search = (props) => {
                         </label>
                     </div>
                     <SearchByContainer>
-                    {/* {
+                    {
                         searchBy ? 
-                        : <h2><span role='img' aria-label='search'>🔍</span>Search For Something</h2>
-                    } */}
                         <>
                         <h2>Search By {searchBy}</h2>
                         <input
@@ -187,30 +204,43 @@ const Search = (props) => {
                         /> 
                         <button>Search</button>
                         </>
+                        : <h2><span role='img' aria-label='search'>🔍</span>Search For Something</h2>
+                    }
                     </SearchByContainer>
                     
                 </form>
             </FormContainer>
-            <ClassCard>
+            <div>
                 <p>{errors.TimeSearch}</p> 
                 <p>{errors.DateSearch}</p> 
                 <p>{errors.DurationSearch}</p> 
                 <p>{errors.TypeSearch}</p>
                 <p>{errors.IntensitySearch}</p> 
                 <p>{errors.LocationSearch}</p>
-            </ClassCard>
+            </div>
             {
                 classData.map((data, i) => {
                     return (
-                    <div key={i}>
-                        <p>Type: {data.type}</p>
-                        <p>Start Time: {data.startTime}</p>
-                        <p>Duration: {data.duration}</p>
-                        <p>Intensity: {data.intensityLevel}</p>
-                        <p>Location: {data.location}</p>
-                        <p>Students Registered: {data.registered}</p>
-                        <p>Max Students: {data.maxRegiter}</p>
-                    </div>
+                    <ClassCard key={i}>
+                        <div>
+                            <p>Type: {data.type}</p>
+                            <p>Intensity: {data.intensityLevel}</p>
+                        </div>
+                        <div>
+                            <p>Start Time: {data.startTime}</p>
+                            <p>Duration: {data.duration}</p>
+                        </div>
+                        
+                        <div>
+                            <p>Location: {data.location}</p>
+                            <p>Students Registered: {data.registered}</p>
+                            <p>Max Students: {data.maxRegiter}</p>
+                        </div>
+                        <div>
+                            <button>Register</button>
+                        </div>
+                        
+                    </ClassCard>
                     )
                 })
             }

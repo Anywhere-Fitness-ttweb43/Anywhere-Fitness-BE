@@ -67,6 +67,10 @@ const FormContainer = styled.div`
 
         button {
             background-color: #FCD900;
+            border-radius: 4px;
+            border: none;
+            margin-top: 0.5rem;
+            height: 20px;
         }
     }
 `
@@ -168,8 +172,10 @@ const Search = (props) => {
                         </label>
                     </div>
                     <SearchByContainer>
-                    {
+                    {/* {
                         searchBy ? 
+                        : <h2><span role='img' aria-label='search'>🔍</span>Search For Something</h2>
+                    } */}
                         <>
                         <h2>Search By {searchBy}</h2>
                         <input
@@ -181,8 +187,6 @@ const Search = (props) => {
                         /> 
                         <button>Search</button>
                         </>
-                        : <h2><span role='img' aria-label='search'>🔍</span>Search For Something</h2>
-                    }
                     </SearchByContainer>
                     
                 </form>

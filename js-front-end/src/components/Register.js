@@ -2,6 +2,108 @@ import React, {useState,useEffect} from 'react'
 import * as Yup from 'yup'
 import axios from 'axios'
 import registerSchema from '../validation/registerSchema'
+import styled from 'styled-components'
+
+
+const FormContainer= styled.div`
+width: 40%;
+margin: auto;
+background: purple;
+border-radius: 0 0 20px 20px;
+
+
+`
+const StyledErrors = styled.div`
+display:flex;
+flex-direction:column;
+text-align:center;
+padding:1.2rem;
+font-family:sans-serif;
+font-weight:600;
+font-size:1.2rem;
+justify-content:center;
+align-item:center;
+color: gold;`
+
+const StyledForm = styled.form`
+
+padding:4rem;
+display:flex;
+flex-direction:column;
+justify-conent:center;
+align-items:center;
+box-sizing:border-box;
+position:relative;
+left:-5px;
+
+& label{
+
+    width:80%;
+    box-sizing:border-box;
+    display:block;
+    
+    
+}
+
+& input{
+    width: 100%;
+    display:block;
+    font-size:1.2rem;
+    border-radius: 15px;
+    padding: .5rem;
+    box-sizing:border-box;
+    outline:none;
+    border: solid 2px purple;
+    margin: .5rem;
+    font-weight:600;
+    
+    & :active{
+        border: solid 2px yellow;
+    }
+}
+
+& select {
+    width:100%;
+    padding:.5rem;
+    border-radius:15px;
+    margin:.5rem;
+    outline:none;
+    font-weight:600;
+    font-size:1.2rem;
+    border: solid 2px purple;
+
+
+
+}
+
+& button{
+    width:70%;
+    right: -5px;
+    position:relative;
+    padding:.5rem;
+    font-size:1.2rem;
+    margin:.5rem;
+    border-radius:15px;
+    border:none;
+    outline:none;
+    background: gold;
+    color:purple;
+    text-transform: uppercase;
+    leter-spacing:5px;
+    font-weight:800;
+    cursor:pointer;
+
+&:disabled {
+    opacity:.5
+
+}
+}
+
+
+
+
+
+`
 
 const Register = (props)=>{
 
@@ -67,18 +169,16 @@ const Register = (props)=>{
     
 
     return(
-        <div>
-            <form onSubmit={onSubmit}>
+        <FormContainer>
+            <StyledForm onSubmit={onSubmit}>
 
-                <label>
-                    <input
+                <label><input
                     placeholder='First Name'
                     name='fname'
                     value={formCreds.fname}
                     type='text'
                     onChange={onChange}
-                    />
-                </label>
+                    /></label>
 
                 <label>
                     <input
@@ -123,14 +223,16 @@ const Register = (props)=>{
 
 
 
-            </form>
+            </StyledForm>
 
+            <StyledErrors>
             <div>{errs.fname}</div>
             <div>{errs.lname}</div>
             <div>{errs.usertype}</div>
             <div>{errs.email}</div>
             <div>{errs.password}</div>
-        </div>
+            </StyledErrors>
+        </FormContainer>
     )
 }
 

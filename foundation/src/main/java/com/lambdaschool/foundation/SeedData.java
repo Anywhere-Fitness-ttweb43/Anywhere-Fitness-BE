@@ -142,7 +142,9 @@ public class SeedData
                 r2));
         userService.save(u5);
 
-        Classes c1 = new Classes("11",
+        Classes c1 = new Classes(
+                "John's Cardio",
+                "11",
                 "02/12/21",
                 "60",
                 "Cardio",
@@ -150,7 +152,9 @@ public class SeedData
                 "Earth");
         classService.save(c1);
 
-        Classes c2 = new Classes("12",
+        Classes c2 = new Classes(
+                "The Other One",
+                "12",
                 "02/13/21",
                 "40",
                 "Other",
@@ -158,7 +162,9 @@ public class SeedData
                 "Not Earth");
         classService.save(c1);
 
-        Classes c3 = new Classes("13",
+        Classes c3 = new Classes(
+                "WHY IS THIS 60min?",
+                "13",
                 "02/15/21",
                 "60",
                 "Test Type",
@@ -166,7 +172,9 @@ public class SeedData
                 "Test Planet");
         classService.save(c1);
 
-        Classes c4 = new Classes("14",
+        Classes c4 = new Classes(
+                "Are you My Mother?",
+                "14",
                 "02/18/21",
                 "5",
                 "Wow",

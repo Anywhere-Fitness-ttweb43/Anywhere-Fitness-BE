@@ -5,18 +5,19 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface ClassRepository extends CrudRepository<Classes, Long>
-{
+public interface ClassRepository extends CrudRepository<Classes, Long> {
 
-    List<Classes> findByClassTime(String time);
+    List<Classes> findByNameContainingIgnoreCase(String name);
 
-    List<Classes> findByClassDate(String date);
+    List<Classes> findByTime(String time);
 
-    List<Classes> findByClassLength(String length);
+    List<Classes> findByDate(String date);
 
-    List<Classes> findByClassType(String type);
+    List<Classes> findByDuration(String duration);
 
-    List<Classes> findByClassIntensity(String intensity);
+    List<Classes> findByTypeIgnoreCase(String type);
 
-    List<Classes> findByClassLocation(String location);
+    List<Classes> findByLocationContainingIgnoreCase(String location);
+
+    List<Classes> findByIntensity(String intensity);
 }

@@ -65,12 +65,13 @@ public class ResourceServerConfig
             .antMatchers("/users/**",
                 "/useremails/**",
                 "/oauth/revoke-token",
-                "/logout")
+                "/logout",
+                    "classes/**")
             .authenticated()
             .antMatchers("/roles/**")
             .hasAnyRole("ADMIN")
-            .anyRequest()
-            .denyAll()
+//            .anyRequest()
+//            .denyAll()
             .and()
             .exceptionHandling()
             .accessDeniedHandler(new OAuth2AccessDeniedHandler());

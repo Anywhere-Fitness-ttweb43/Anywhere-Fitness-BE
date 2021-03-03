@@ -4,17 +4,19 @@ import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.Classes;
 import com.lambdaschool.foundation.repository.ClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-
+@Transactional
+@Service(value = "classService")
 public class ClassServiceImpl implements ClassService
 {
     @Autowired
     private ClassRepository classrepos;
+
 
 
     @Override
@@ -39,9 +41,8 @@ public class ClassServiceImpl implements ClassService
                     .orElseThrow(() -> new ResourceNotFoundException("Class id" + classes.getClassid() + " not found!"));
             newClass.setClassid(classes.getClassid());
         }
-
-        newClass.setTime(classes.getTime()
-                .toLowerCase());
+        newClass.setName(classes.getName());
+        newClass.setTime(classes.getTime());
         newClass.setDate(classes.getDate());
         newClass.setDuration(classes.getDuration());
         newClass.setType(classes.getType());
@@ -51,62 +52,69 @@ public class ClassServiceImpl implements ClassService
         return classrepos.save(newClass);
     }
 
-//    @Override
-//    public List<Restaurant> findRestaurantByNameLike(String name)
-//    {
-//        List<Restaurant> list = restrepos.findByNameContainingIgnoreCase(name);
-//        return list;
-//    }
+    @Override
+    public List<Classes> findByName(String name)
+    {
+        List<Classes> list = classrepos.findByNameContainingIgnoreCase(name);
+        return list;
+    }
+
 
     @Override
     public List<Classes> findByTime(String time) {
-        List<Classes> list = classrepos.findByClassTime(time);
+        List<Classes> list = classrepos.findByTime(time);
         return list;
     }
 
     @Override
     public List<Classes> findByDate(String date) {
-        List<Classes> list = classrepos.findByClassDate(date);
+        List<Classes> list = classrepos.findByDate(date);
+        if (list == null)
+        {
+            throw new ResourceNotFoundException("Nothing found using query!");
+        }
         return list;
     }
 
     @Override
-    public Classes findByLength(String length) {
-        Classes c = classrepos.findByClassLength(length);
-        if (c == null)
+    public List<Classes> findByDuration(String duration) {
+        List<Classes> list = classrepos.findByDuration(duration);
+        if (list == null)
         {
-            throw new ResourceNotFoundException("Class with length of " + length " min not found");
+            throw new ResourceNotFoundException("Nothing found using query!");
         }
-        return c;
+        return list;
     }
 
     @Override
-    public Classes findByType(String type) {
-        Classes c = classrepos.findByClassType(type);
-        if (c == null)
+    public List<Classes> findByType(String type) {
+        List<Classes> list = classrepos.findByTypeIgnoreCase(type);
+        if (list == null)
         {
-            throw new ResourceNotFoundException("Class with Type of " + type + " not found!");
+            throw new ResourceNotFoundException("Nothing found using query!");
         }
-        return c;
+        return list;
     }
 
     @Override
-    public Classes findByIntensity(String intensity) {
-        Classes c = classrepos.findByClassIntensity(intensity);
-        if (c == null)
+    public List<Classes> findByIntensity(String intensity) {
+        List<Classes> list = classrepos.findByIntensity(intensity);
+        if (list == null)
         {
-            throw new ResourceNotFoundException("Class with intensity level of " + intensity + " not found!");
+            throw new ResourceNotFoundException("Nothing found using query!");
         }
-        return c;
+        return list;
     }
 
     @Override
-    public Classes findByLocation(String location) {
-        Classes c = classrepos.findByClassLocation(location);
-        if (c == null)
-        {
-            throw new ResourceNotFoundException("Class at location " + location + " doesn't exist!");
-        }
-        return c;
+    public List<Classes> findByLocation(String location) {
+        List<Classes> list = classrepos.findByLocationContainingIgnoreCase(location);
+        if (list == null)
+            if (list == null)
+            {
+                throw new ResourceNotFoundException("Nothing found using query!");
+            }
+        return list;
     }
+
 }

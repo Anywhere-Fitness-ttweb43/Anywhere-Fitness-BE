@@ -24,54 +24,73 @@ public class ClassController
     
 //     Get Class Time Start
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    @GetMapping(value ="/time", produces = "application/json")
-    public ResponseEntity<?> searchByTime()
+    @GetMapping(value ="/time/{time}", produces = "application/json")
+    public ResponseEntity<?> searchByTime(
+            @PathVariable
+            String time
+    )
     {
-        List<Classes> myClasses = classService.findByTime();
+        List<Classes> myClasses = classService.findByTime(time);
         return new ResponseEntity<>(myClasses, HttpStatus.OK);
     }
+
     // get Class Date
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    @GetMapping(value = "/date", produces = "application/json")
-    public  ResponseEntity<?> searchByDate()
+    @GetMapping(value = "/date/{date}", produces = "application/json")
+    public  ResponseEntity<?> searchByDate(
+            @PathVariable
+            String date
+    )
     {
-        List<Classes> myClasses = classService.findByDate();
+        List<Classes> myClasses = classService.findByDate(date);
         return new ResponseEntity<>(myClasses, HttpStatus.OK);
     }
 
     // get Class duration
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    @GetMapping(value = "/length", produces = "application/json")
-    public ResponseEntity<?> searchByLength()
+    @GetMapping(value = "/duration/{duration}", produces = "application/json")
+    public ResponseEntity<?> searchByLength(
+            @PathVariable
+            String duration
+    )
     {
-        List<Classes> myClasses = classService.findByLength();
+        List<Classes> myClasses = classService.findByDuration(duration);
         return new ResponseEntity<>(myClasses, HttpStatus.OK);
     }
 
     // get Class type
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    @GetMapping(value = "/type", produces = "application/json")
-    public ResponseEntity<?> searchByType()
+    @GetMapping(value = "/type/{type}", produces = "application/json")
+    public ResponseEntity<?> searchByType(
+            @PathVariable
+            String type
+    )
     {
-        List<Classes> myClasses = classService.findByType();
+        List<Classes> myClasses = classService.findByType(type);
         return new ResponseEntity<>(myClasses, HttpStatus.OK);
     }
 
     // get Intensity level
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    @GetMapping(value = "intensity", produces = "application/json")
-    public ResponseEntity<?> searchByIntensity()
+    @GetMapping(value = "/intensity/{intensity}", produces = "application/json")
+    public ResponseEntity<?> searchByIntensity(
+            @PathVariable
+            String intensity
+    )
     {
-        List<Classes> myClasses = classService.findByIntensity();
+        List<Classes> myClasses = classService.findByIntensity(intensity);
         return new ResponseEntity<>(myClasses, HttpStatus.OK);
     }
 
     // get Class Location
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    @GetMapping(value = "location", produces = "application/json")
-    public ResponseEntity<?> searchByLocation()
+    @GetMapping(value = "/location/{location}", produces = "application/json")
+    public ResponseEntity<?> searchByLocation(
+            @PathVariable
+            String location
+    )
     {
-        List<Classes> myClasses = classService.findByLocation();
+        List<Classes> myClasses = classService.findByLocation(location);
         return new ResponseEntity<>(myClasses, HttpStatus.OK);
     }
 
@@ -85,7 +104,7 @@ public class ClassController
     }
 
     // add class
-    @PostMapping(value = "class", consumes = "application/json")
+    @PostMapping(value = "/class", consumes = "application/json")
     public ResponseEntity<?> addNewClass(
             @Valid
             @RequestBody

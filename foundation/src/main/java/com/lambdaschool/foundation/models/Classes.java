@@ -12,6 +12,9 @@ public class Classes {
     private long classid;
 
     @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
     private String time;
 
     @Column(nullable = false)
@@ -34,7 +37,8 @@ public class Classes {
     {
     }
 
-    public Classes(String time, String date, String duration, String type, String intensity, String location) {
+    public Classes(String name,String time, String date, String duration, String type, String intensity, String location) {
+        this.name = name;
         this.time = time;
         this.date = date;
         this.duration = duration;
@@ -49,6 +53,14 @@ public class Classes {
 
     public void setClassid(long classid) {
         this.classid = classid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getTime() {

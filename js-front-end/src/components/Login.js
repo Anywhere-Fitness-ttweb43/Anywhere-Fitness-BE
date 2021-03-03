@@ -1,18 +1,68 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import loginSchema from '../validation/loginSchema';
 import * as yup from 'yup';
 import styled from 'styled-components'
 
+const Container = styled.div`
+	font-family: sans-serif;
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 80vh;
+	
+	form {
+		padding: 2rem;
+		background: linear-gradient(180deg,#5c2e85 -12.68%,#762b85 51.91%,#5c2e85 111.27%);
+		border-radius: 8px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 50%;
+		input {
+			border-radius: 4px;
+			border: none;
+			height: 29px;
+			margin: 1rem 0 0 1rem;
+		}
+
+		input[name=email] {
+			margin-left: 2.6rem;
+		}
+
+		button {
+			background-color: #FCD900;
+			border-radius: 4px;
+			border: none;
+			margin-top: 0.5rem;
+			height: 20px;
+			width: 6rem;
+			color: #5c2e85;
+		}
+
+		button:disabled {
+			opacity: 0.5;
+		}
+	}
+`
+
 const Login = (props) => {
+
 
 	const initialErrors = {
 		email: '',
 		password: ''
 	}
+	const initialCredentials = {
+		email: '',
+		password: ''
+	}
 
-	const [credentials, setCredentials] = useState({ email: "", password: "" });
+	const [credentials, setCredentials] = useState(initialCredentials);
 	const [errors, setErrors] = useState(initialErrors);
+	const [disabled, setDisabled] = useState(true);
 
 	const login = (e) => {
 		e.preventDefault();
@@ -43,6 +93,11 @@ const Login = (props) => {
 			.catch(err => setErrors({...errors, [name]: err.errors[0]}))
 	}
 
+	useEffect(() => {
+		loginSchema.isValid(credentials)
+			.then(valid => setDisabled(!valid))
+    } ,[credentials])
+
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 
@@ -53,45 +108,6 @@ const Login = (props) => {
 		});
 	}
 
-	const Container = styled.div`
-		font-family: sans-serif;
-		color: #fff;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		height: 80vh;
-		
-		form {
-			padding: 2rem;
-			background: linear-gradient(180deg,#5c2e85 -12.68%,#762b85 51.91%,#5c2e85 111.27%);
-			border-radius: 8px;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			width: 50%;
-			input {
-				border-radius: 4px;
-				border: none;
-				height: 29px;
-				margin: 1rem 0 0 1rem;
-			}
-
-			input[name=email] {
-				margin-left: 2.6rem;
-			}
-
-			button {
-				background-color: #FCD900;
-				border-radius: 4px;
-				border: none;
-				margin-top: 0.5rem;
-				height: 20px;
-				width: 6rem;
-				color: #5c2e85;
-			}
-		}
-	`
 
 	return (
 		<Container>
@@ -118,7 +134,7 @@ const Login = (props) => {
 					/>
 				</label>
 				<br/>
-				<button>Log in</button>
+				<button disabled={disabled}>Log in</button>
 				<div>
 					<p>{errors.email}</p>
 					<p>{errors.password}</p>

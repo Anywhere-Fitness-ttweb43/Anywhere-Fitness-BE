@@ -58,13 +58,11 @@ const Login = (props) => {
 		color: #fff;
 		display: flex;
 		flex-direction: column;
-		border: 1px solid black;
 		align-items: center;
 		justify-content: center;
 		height: 80vh;
 		
 		form {
-			border: 1px solid black;
 			padding: 2rem;
 			background: linear-gradient(180deg,#5c2e85 -12.68%,#762b85 51.91%,#5c2e85 111.27%);
 			border-radius: 8px;

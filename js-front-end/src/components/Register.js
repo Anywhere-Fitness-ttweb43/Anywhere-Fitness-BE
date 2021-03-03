@@ -134,7 +134,7 @@ const Register = (props)=>{
             .then(()=> setErrs({...errs, [name]:''}))
             .catch(err=>setErrs({...errs, [name]:err.errors[0]}))
         setFormCreds({...formCreds,[name]:value})
-        console.dir(e.target)
+       // console.dir(e.target)
 
     }
 

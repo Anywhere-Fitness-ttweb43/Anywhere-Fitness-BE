@@ -4,21 +4,32 @@ import { Link } from 'react-router-dom'
 
 const Wrapper = styled.div`
     font-family: sans-serif;
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 const Main = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    justify-content: center;
+    height: 90%;
 `
 const Container = styled.div`
+    background: linear-gradient(180deg,#5c2e85 -12.68%,#762b85 51.91%,#5c2e85 111.27%);
+    border: 4px solid #FCD900;
+    border-radius: 2rem;
     margin: 1rem 0 1rem 0;
+    padding: 2rem;
     width: 50%;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     div {
         width: 50%;
         display: flex;
@@ -28,26 +39,35 @@ const Container = styled.div`
 
     a {
         text-decoration: none;
-        color: #000;
-        border: 2px solid #000;
+        color: #5c2e85;
+        background-color: #FCD900;
         padding: 1rem;
         border-radius: 15px;
     }
+
+    p {
+        color: #fff;
+        font-size: 2rem;
+    }
 `;
+
+const ImageContainer = styled.div`
+    background: url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1268&q=80')
+        no-repeat center center fixed;
+    object-fit: cover;
+    height: 50%;
+    width: 100%;
+`
 
 const HomePage = () => {
     return (
         <Wrapper>
 
+            <ImageContainer>
             <Main>
                 {/* random filler image */}
                 <Container className='image-and-title'>
-                    <img src='https://picsum.photos/1920/1080' alt='filler' width='720'/>
-                    <p>Anywhere fitness Bacon ipsum dolor amet meatball shank ham strip steak flank
-                    tail rump beef burgdoggen. Pork chop salami flank drumstick ham short loin tri-tip 
-                    chislic venison pig biltong. T-bone pork belly meatloaf, sausage tail chuck biltong rump 
-                    alcatra beef ribs turkey. Turkey leberkas biltong, corned beef kevin jerky rump flank landjaeger chicken 
-                    shank. Andouille beef tenderloin doner turkey.</p>
+                    <p>Fitness. Anytime. Anywhere.</p>
                     <div>
                         <Link to='/all'>All Classes</Link>
                         <Link to='/search'>Search</Link>
@@ -55,6 +75,7 @@ const HomePage = () => {
                 </Container>
                 
             </Main>
+            </ImageContainer>
 
 
         </Wrapper>

@@ -134,11 +134,13 @@ const Register = (props)=>{
             .then(()=> setErrs({...errs, [name]:''}))
             .catch(err=>setErrs({...errs, [name]:err.errors[0]}))
         setFormCreds({...formCreds,[name]:value})
+       // console.dir(e.target)
 
     }
 
     const onSubmit=(e)=>{
         e.preventDefault()
+        
         // axios
 		// 	.post(
 		// 		"https://jrmmba-foundation.herokuapp.com/login",
@@ -156,7 +158,9 @@ const Register = (props)=>{
 		// 		localStorage.setItem("token", res.data.access_token);
 		// 		props.history.push("/userinfo");
 		// 	});
+        
         setFormCreds(initialCreds)
+
     }
 
     useEffect(()=>{
@@ -191,8 +195,8 @@ const Register = (props)=>{
                 </label>
 
                 <label>
-                    <select name='usertype' onChange={onChange}>
-                        <option>----Select One----</option>
+                    <select name='usertype' value={formCreds.usertype} onChange={onChange}>
+                        <option value=''>----Select One----</option>
                         <option value='instructor'>Instructor</option>
                         <option value='student'>Student</option>
                     </select>

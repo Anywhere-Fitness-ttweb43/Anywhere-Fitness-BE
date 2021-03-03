@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import logo from "../assets/logo.png"
 import loginSchema from '../validation/loginSchema';
 import * as yup from 'yup';
+import styled from 'styled-components'
 
 const Login = (props) => {
 
@@ -53,37 +53,80 @@ const Login = (props) => {
 		});
 	}
 
+	const Container = styled.div`
+		font-family: sans-serif;
+		color: #fff;
+		display: flex;
+		flex-direction: column;
+		border: 1px solid black;
+		align-items: center;
+		justify-content: center;
+		height: 80vh;
+		
+		form {
+			border: 1px solid black;
+			padding: 2rem;
+			background: linear-gradient(180deg,#5c2e85 -12.68%,#762b85 51.91%,#5c2e85 111.27%);
+			border-radius: 8px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 50%;
+			input {
+				border-radius: 4px;
+				border: none;
+				height: 29px;
+				margin: 1rem 0 0 1rem;
+			}
+
+			input[name=email] {
+				margin-left: 2.6rem;
+			}
+
+			button {
+				background-color: #FCD900;
+				border-radius: 4px;
+				border: none;
+				margin-top: 0.5rem;
+				height: 20px;
+				width: 6rem;
+				color: #5c2e85;
+			}
+		}
+	`
+
 	return (
-		<>
-		<img src={logo} alt=""/>
-		<h2>Fitness Login</h2>
-		<form onSubmit={login}>
-			<label>
-				Email:
-				<input
-					type="email"
-					name="email"
-					value={credentials.email}
-					onChange={handleChange}
-				/>
-			</label>
-			<label>
-				password:
-				<input
-					type="password"
-					name="password"
-					value={credentials.password}
-					onChange={handleChange}
-				/>
-			</label>
-			<br/>
-			<button>Log in</button>
-		</form>
-		<div>
-			<p>{errors.email}</p>
-			<p>{errors.password}</p>
-		</div>
-		</>
+		<Container>
+			<form onSubmit={login}>
+			<h2>Fitness Login</h2>
+				<label>
+					Email:
+					<input
+						type="email"
+						name="email"
+						value={credentials.email}
+						placeholder='email@email.com'
+						onChange={handleChange}
+					/>
+				</label>
+				<label>
+					Password:
+					<input
+						type="password"
+						name="password"
+						value={credentials.password}
+						placeholder='password'
+						onChange={handleChange}
+					/>
+				</label>
+				<br/>
+				<button>Log in</button>
+				<div>
+					<p>{errors.email}</p>
+					<p>{errors.password}</p>
+				</div>
+			</form>
+		</Container>
 	);
 };
 

@@ -112,7 +112,7 @@
     </dependencies>
 
     <build>
-        <finalName>jrmmba-foundation</finalName>
+        <finalName>ttweb43-backendjava</finalName>
 
         <plugins>
             <plugin>

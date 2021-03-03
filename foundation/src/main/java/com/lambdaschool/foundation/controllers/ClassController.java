@@ -15,6 +15,14 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+
+
+//catgeory = dropdown box state
+//Search Term = search box state
+// base_url/classes/{category}/{searchTerm}
+
+
+
 @RestController
 @RequestMapping("/classes")
 public class ClassController

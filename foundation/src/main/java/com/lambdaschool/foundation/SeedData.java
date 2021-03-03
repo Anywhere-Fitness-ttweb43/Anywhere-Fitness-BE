@@ -160,7 +160,7 @@ public class SeedData
                 "Other",
                 "2",
                 "Not Earth");
-        classService.save(c1);
+        classService.save(c2);
 
         Classes c3 = new Classes(
                 "WHY IS THIS 60min?",
@@ -170,7 +170,7 @@ public class SeedData
                 "Test Type",
                 "3",
                 "Test Planet");
-        classService.save(c1);
+        classService.save(c3);
 
         Classes c4 = new Classes(
                 "Are you My Mother?",
@@ -180,7 +180,7 @@ public class SeedData
                 "Wow",
                 "0",
                 "Wow");
-        classService.save(c1);
+        classService.save(c4);
 
 
         if (false)

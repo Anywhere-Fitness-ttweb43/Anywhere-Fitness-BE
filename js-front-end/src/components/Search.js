@@ -104,9 +104,9 @@ const ClassCard = styled.div`
     }
 `;
 
-
 const Search = (props) => {
     const initialErrors = {
+        NameSearch: '',
         TimeSearch: '',
         DateSearch: '',
         DurationSearch: '',
@@ -138,6 +138,8 @@ const Search = (props) => {
     // choose which schema to use based on the chosen searchBy
     const chooseSchema = (type) => {
         switch(type){
+            case 'Name':
+                return searchSchema.name
             case 'Time':
                 return searchSchema.time
             case 'Date':
@@ -181,6 +183,7 @@ const Search = (props) => {
                         <label>Search By:
                             <select onChange={changeSearchBy} value={searchBy}>
                                 <option name='' value=''>Select</option>
+                                <option name='Name' value='Name'>Name</option>
                                 <option name='Time' value='Time'>Time</option>
                                 <option name='Date' value='Date'>Date</option>
                                 <option name='Duration' value='Duration'>Duration</option>
@@ -211,6 +214,7 @@ const Search = (props) => {
                 </form>
             </FormContainer>
             <div>
+                <p>{errors.NameSearch}</p> 
                 <p>{errors.TimeSearch}</p> 
                 <p>{errors.DateSearch}</p> 
                 <p>{errors.DurationSearch}</p> 

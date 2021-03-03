@@ -1,8 +1,12 @@
 import * as yup from 'yup'
 
 const searchSchema = {
+    name: yup.object().shape({
+        NameSearch: yup.string()
+            .required('name is required')
+    }),
     time: yup.object().shape({
-        TimeSearch: yup.number('enter a number')
+        TimeSearch: yup.number()
             .required('time is required (number)')
     }),
     date: yup.object().shape({

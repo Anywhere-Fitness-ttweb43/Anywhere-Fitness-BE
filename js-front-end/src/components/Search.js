@@ -1,41 +1,9 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 import * as yup from 'yup'
 import searchSchema from '../validation/searchSchema'
 import styled from 'styled-components'
+import {axiosWithAuth} from './axiosWithAuth'
 
-const dummyData = [
-    {
-        name: 'Fitness Class',
-        type: 'Running',
-        startTime: '8pm',
-        duration: '1hour',
-        intensityLevel: '5',
-        location: 'Denver',
-        registered: '6',
-        maxRegiter: '10',
-    },
-    {
-        name: 'Fitness Class',
-        type: 'Running',
-        startTime: '8pm',
-        duration: '1hour',
-        intensityLevel: '5',
-        location: 'Denver',
-        registered: '6',
-        maxRegiter: '10',
-    },
-    {
-        name: 'Fitness Class',
-        type: 'Running',
-        startTime: '8pm',
-        duration: '1hour',
-        intensityLevel: '5',
-        location: 'Denver',
-        registered: '6',
-        maxRegiter: '10',
-    },
-]
 
 const Container = styled.div`
     height: 100vh;
@@ -127,7 +95,7 @@ const Search = (props) => {
 
     const [searchTerm, setSearchTerm] = useState('')
     const [searchBy, setSearchBy] = useState('')
-    const [classData, setClassData] = useState(dummyData)
+    const [classData, setClassData] = useState([])
     const [errors, setErrors] = useState(initialErrors)
 
     const changeSearchBy = (e) => {
@@ -175,13 +143,14 @@ const Search = (props) => {
 
     const search = (e) => {
         e.preventDefault()
-        const lowercaseSearchTerm = searchBy.toLowerCase()
-        const url = `localhost:2019/classes/${lowercaseSearchTerm}`
-        axios.get(url)
+        const lowercaseSearchBy = searchBy.toLowerCase()
+        console.log(searchTerm)
+        const url = `/classes/${lowercaseSearchBy}/${searchTerm}`
+        axiosWithAuth().get(url)
             .then(res => setClassData(res.data))
             .catch(err => console.log(err))
-            // finally to set dummy data for now.
-            .finally(setClassData(dummyData))
+            // // finally to set dummy data for now.
+            // .finally(setClassData(dummyData))
     }
 
     return (
@@ -242,7 +211,7 @@ const Search = (props) => {
                         <ClassInfo>
                             <div>
                                 <p>Type: {data.type}</p>
-                                <p>Intensity: {data.intensityLevel}</p>
+                                <p>Intensity: {data.intensity}</p>
                             </div>
                             <div>
                                 <p>Start Time: {data.startTime}</p>
@@ -251,8 +220,8 @@ const Search = (props) => {
                             
                             <div>
                                 <p>Location: {data.location}</p>
-                                <p>Students Registered: {data.registered}</p>
-                                <p>Max Students: {data.maxRegiter}</p>
+                                {/* <p>Students Registered: {data.registered}</p>
+                                <p>Max Students: {data.maxRegiter}</p> */}
                             </div>
                             <div>
                                 <button>Register</button>

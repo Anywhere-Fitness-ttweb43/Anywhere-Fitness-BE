@@ -1,39 +1,39 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import axios from 'axios'
+import {axiosWithAuth} from './axiosWithAuth'
 
-const dummyData = [
-    {
-        name: 'Fitness Class',
-        type: 'Running',
-        startTime: '8pm',
-        duration: '1hour',
-        intensityLevel: '5',
-        location: 'Denver',
-        registered: '6',
-        maxRegiter: '10',
-    },
-    {
-        name: 'Fitness Class',
-        type: 'Running',
-        startTime: '8pm',
-        duration: '1hour',
-        intensityLevel: '5',
-        location: 'Denver',
-        registered: '6',
-        maxRegiter: '10',
-    },
-    {
-        name: 'Fitness Class',
-        type: 'Running',
-        startTime: '8pm',
-        duration: '1hour',
-        intensityLevel: '5',
-        location: 'Denver',
-        registered: '6',
-        maxRegiter: '10',
-    },
-]
+// const dummyData = [
+//     {
+//         name: 'Fitness Class',
+//         type: 'Running',
+//         startTime: '8pm',
+//         duration: '1hour',
+//         intensityLevel: '5',
+//         location: 'Denver',
+//         registered: '6',
+//         maxRegiter: '10',
+//     },
+//     {
+//         name: 'Fitness Class',
+//         type: 'Running',
+//         startTime: '8pm',
+//         duration: '1hour',
+//         intensityLevel: '5',
+//         location: 'Denver',
+//         registered: '6',
+//         maxRegiter: '10',
+//     },
+//     {
+//         name: 'Fitness Class',
+//         type: 'Running',
+//         startTime: '8pm',
+//         duration: '1hour',
+//         intensityLevel: '5',
+//         location: 'Denver',
+//         registered: '6',
+//         maxRegiter: '10',
+//     },
+// ]
 
 const Container = styled.div`
     font-family: sans-serif;
@@ -73,11 +73,14 @@ const ClassCard = styled.div`
 `
 
 const AllClasses = (props) => {
-    const [data, setData] = useState(dummyData)
+    const [data, setData] = useState([])
 
     useEffect(() => {
-        axios.get('localhost:2019/classes/all')
-            .then(res => setData(res.data))
+        axiosWithAuth().get('/classes/all')
+            .then((res) => {
+                setData(res.data)
+                console.log(res.data)
+            })
             .catch(err => console.log(err))
     }, [])
 
@@ -94,7 +97,7 @@ const AllClasses = (props) => {
                             <ClassInfo>
                                 <div>
                                     <p>Type: {data.type}</p>
-                                    <p>Intensity: {data.intensityLevel}</p>
+                                    <p>Intensity: {data.intensity}</p>
                                 </div>
                                 <div>
                                     <p>Start Time: {data.startTime}</p>
@@ -104,7 +107,7 @@ const AllClasses = (props) => {
                                 <div>
                                     <p>Location: {data.location}</p>
                                     <p>Students Registered: {data.registered}</p>
-                                    <p>Max Students: {data.maxRegiter}</p>
+                                    <p>Max Students: {data.maxRegister}</p>
                                 </div>
                                 <div>
                                     <button>Register</button>

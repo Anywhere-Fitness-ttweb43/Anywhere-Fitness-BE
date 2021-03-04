@@ -9,13 +9,30 @@ const StyledNav = styled.nav`
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
 
     a {
         text-decoration: none;
         color: #fff;
         padding: 1rem;
     }
+
+    div[id=logout] {
+        margin-right: 2rem;
+
+        button {
+            text-decoration: none;
+            color: #fff;
+            padding: 1rem;
+            background-color: transparent;
+            border: none;
+            font-size: 16px;
+            :hover {
+                cursor: pointer;
+            }
+        }
+    }
+
 `
 const Header = styled.header`
     font-family: sans-serif;
@@ -55,10 +72,14 @@ const Nav = (props) => {
         <Header>
             <LogoDiv><Link to='/'><h2>Anywhere Fitness</h2></Link></LogoDiv>
             <StyledNav>
-                <Link to='/all'>All Classes</Link>
-                <Link to='/login'>Log In</Link>
-                <Link to='/register'>Register</Link>
-                <button onClick={logout}>Logout</button>
+                <div>
+                    <Link to='/all'>All Classes</Link>
+                    <Link to='/login'>Log In</Link>
+                    <Link to='/register'>Register</Link>
+                </div>
+                <div id='logout'>
+                    <button onClick={logout}>Logout</button>
+                </div>
             </StyledNav>
         </Header>
     )

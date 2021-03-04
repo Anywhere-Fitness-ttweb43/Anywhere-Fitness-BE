@@ -3,6 +3,7 @@ import * as Yup from 'yup'
 import axios from 'axios'
 import registerSchema from '../validation/registerSchema'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 
 
 const PageContainer=styled.div`
@@ -125,67 +126,63 @@ left:-5px;
 
 const Register = (props)=>{
 
-    const initialCreds={
-        fname:'',
-        lname:'',
-        usertype:'',
-        email:'',
-        password:'',
-    }
+    const history = useHistory()
 
-    const initialErrs={
-        fname:'',
-        lname:'',
-        usertype:'',
-        email:'',
-        password:'',
-    }
+    const initialCreds={
+        "username": "",
+        "password": "",
+        "primaryemail": "",
+        "roles": [
+            {
+                "role": {
+                    "roleid": 1
+                }
+            }]
+        }
+
+    // const initialErrs={
+    //     fname:'',
+    //     lname:'',
+    //     usertype:'',
+    //     email:'',
+    //     password:'',
+    // }
 
     const [formCreds,setFormCreds]=useState(initialCreds)
-    const [errs,setErrs]=useState(initialErrs)
+    // const [errs,setErrs]=useState(initialErrs)
     const [disabled, setDisabled]= useState(true)
 
     const onChange = (e)=>{
         const{name,value}=e.target
-        Yup.reach(registerSchema,name)
-            .validate(value)
-            .then(()=> setErrs({...errs, [name]:''}))
-            .catch(err=>setErrs({...errs, [name]:err.errors[0]}))
+        // Yup.reach(registerSchema,name)
+        //     .validate(value)
+        //     .then(()=> setErrs({...errs, [name]:''}))
+        //     .catch(err=>setErrs({...errs, [name]:err.errors[0]}))
         setFormCreds({...formCreds,[name]:value})
        // console.dir(e.target)
 
     }
 
-    const onSubmit=(e)=>{
+    const onSubmit = (e) => {
         e.preventDefault()
-        
-        // axios
-		// 	.post(
-		// 		"https://jrmmba-foundation.herokuapp.com/login",
-		// 		`grant_type=password&username=${credentials.username}&password=${credentials.password}`,
-		// 		{
-		// 			headers: {
-		// 				// btoa is converting our client id/client secret into base64
-		// 				Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
-		// 				"Content-Type": "application/x-www-form-urlencoded",
-		// 			},
-		// 		},
-		// 	)
-		// 	.then((res) => {
-		// 		console.log(res.data);
-		// 		localStorage.setItem("token", res.data.access_token);
-		// 		props.history.push("/userinfo");
-		// 	});
-        
-        setFormCreds(initialCreds)
-
+        console.log(formCreds)
+        debugger;
+        axios.post(`https://ttweb43-backendjava.herokuapp.com/createnewuser`, formCreds)
+        .then((res) => {
+            console.log(res)
+            localStorage.setItem('token', res.data.access_token)
+            history.push('/all')
+        })
+        .catch((err) => {
+            console.log({err})
+        })
     }
 
-    useEffect(()=>{
+    // useEffect(()=>{
 
-        registerSchema.isValid(formCreds).then(valid=>setDisabled(!valid))
+    //     registerSchema.isValid(formCreds).then(valid=>setDisabled(!valid))
 
-    },[formCreds])
+    // },[formCreds])
 
 
     
@@ -197,36 +194,26 @@ const Register = (props)=>{
             <StyledForm onSubmit={onSubmit}>
 
                 <label><input
-                    placeholder='First Name'
-                    name='fname'
-                    value={formCreds.fname}
+                    placeholder='Username'
+                    name='username'
+                    value={formCreds.username}
                     type='text'
                     onChange={onChange}
                     /></label>
 
                 <label>
-                    <input
-                    placeholder='Last Name'
-                    name='lname'
-                    value={formCreds.lname}
-                    type='text'
-                    onChange={onChange}
-                    />
-                </label>
-
-                <label>
-                    <select name='usertype' value={formCreds.usertype} onChange={onChange}>
+                    <select name='usertype' value={formCreds.roles[0].role.roleid} onChange={onChange}>
                         <option value=''>----Select One----</option>
-                        <option value='instructor'>Instructor</option>
-                        <option value='student'>Student</option>
+                        <option value='1'>Instructor</option>
+                        <option value='2'>Student</option>
                     </select>
                 </label>
 
                 <label>
                     <input
-                    name='email'
+                    name='primaryemail'
                     placeholder='E-mail'
-                    value={formCreds.email}
+                    value={formCreds.primaryemail}
                     type='text'
                     onChange={onChange}
                     />
@@ -242,20 +229,20 @@ const Register = (props)=>{
                     />
                 </label>
 
-                <button disabled={disabled}>Register</button>
+                <button >Register</button>
 
 
 
 
             </StyledForm>
 
-            <StyledErrors>
+            {/* <StyledErrors>
             <div>{errs.fname}</div>
             <div>{errs.lname}</div>
             <div>{errs.usertype}</div>
             <div>{errs.email}</div>
             <div>{errs.password}</div>
-            </StyledErrors>
+            </StyledErrors> */}
         </FormContainer>
         </PageContainer>
     )

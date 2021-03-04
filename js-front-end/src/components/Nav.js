@@ -1,6 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import { axiosWithAuth } from './axiosWithAuth'
 
 const StyledNav = styled.nav`
     padding: 0;
@@ -35,6 +36,21 @@ const LogoDiv = styled.div`
 `
 
 const Nav = (props) => {
+    const history = useHistory()
+
+    const logout = () => {
+        console.log('logout')
+        axiosWithAuth().get('/logout')
+        .then((res) => {
+            console.log(res)
+            localStorage.removeItem('token')
+            history.push('/')
+        })
+        .catch((err) => {
+            console.log({err})
+        })
+    }
+
     return (
         <Header>
             <LogoDiv><Link to='/'><h2>Anywhere Fitness</h2></Link></LogoDiv>
@@ -42,6 +58,7 @@ const Nav = (props) => {
                 <Link to='/all'>All Classes</Link>
                 <Link to='/login'>Log In</Link>
                 <Link to='/register'>Register</Link>
+                <button onClick={logout}>Logout</button>
             </StyledNav>
         </Header>
     )

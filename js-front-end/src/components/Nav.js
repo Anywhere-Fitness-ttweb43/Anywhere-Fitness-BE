@@ -79,15 +79,6 @@ const Nav = (props) => {
         <Header>
             <LogoDiv><Link to='/'><h2>Anywhere Fitness</h2></Link></LogoDiv>
             <StyledNav>
-                {/* <div>
-                    <Link to='/all'>All Classes</Link>
-                    <Link to='/login'>Log In</Link>
-                    <Link to='/register'>Register</Link>
-                </div>
-                <div id='logout'>
-                    <button onClick={logout}>Logout</button>
-                </div> */}
-
                 {
                     isLoggedIn ?
                     <>

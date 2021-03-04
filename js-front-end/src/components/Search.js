@@ -37,13 +37,18 @@ const dummyData = [
     },
 ]
 
+
+
 const Container = styled.div`
     height: 100vh;
     font-family: sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    width: 70%;
+    margin: auto;
+
+    div {
+        margin: auto;
+        width: 75%;
+    }
 `
 const FormContainer = styled.div`
     width: 30%;
@@ -56,9 +61,10 @@ const FormContainer = styled.div`
     color: #fff;
     border-radius: 8px;
     form {
+        width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
 
         input {
@@ -103,7 +109,8 @@ const ClassInfo = styled.div`
 
 const ClassCard = styled.div`
     color: #fff;
-    margin-top: 1rem;
+    margin-top: 1rem !important;
+    box-sizing: border-box;
     border-radius: 8px;
     padding: 20px;
     background: linear-gradient(180deg,#5c2e85 -12.68%,#762b85 51.91%,#5c2e85 111.27%);
@@ -112,6 +119,7 @@ const ClassCard = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    height: max-content;
 `
 
 const Search = (props) => {
@@ -186,11 +194,12 @@ const Search = (props) => {
 
     return (
         <Container>
+            <div>
             <FormContainer>
                 <form onSubmit={search}>
                     <div>
                         <h1>Search</h1>
-                        <label>Search By:
+                        <label>Search By:&nbsp;&nbsp;&nbsp;
                             <select onChange={changeSearchBy} value={searchBy}>
                                 <option name='' value=''>Select</option>
                                 <option name='Name' value='Name'>Name</option>
@@ -262,9 +271,8 @@ const Search = (props) => {
                     )
                 })
             }
-        
+            </div>
         </Container>
-
     )
 }
 

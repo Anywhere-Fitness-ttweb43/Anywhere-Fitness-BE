@@ -167,6 +167,7 @@ const Register = (props)=>{
             console.log(res)
             localStorage.setItem('token', res.data.access_token)
             history.push('/all')
+            window.location.reload()
         })
         .catch((err) => {
             console.log({err})

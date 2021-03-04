@@ -5,11 +5,28 @@ import registerSchema from '../validation/registerSchema'
 import styled from 'styled-components'
 
 
+const PageContainer=styled.div`
+width:60%;
+height:70vh;
+magin:auto;
+background: no-repeat url(https://www.wpxi.com/resizer/VwKKyZvgUAo78gGwj1gmR2MzU2M=/1200x675/arc-anglerfish-arc2-prod-cmg.s3.amazonaws.com/public/BQ6QRWWQSJBQNL6NQ3NQO367II.jpg);
+background-size:cover;
+background-color: gray;
+position:relative;
+left:19%;
+
+`
+
+
 const FormContainer= styled.div`
-width: 40%;
-margin: auto;
-background: purple;
+border: 5px solid gold;
+border-top:none;
+width: 70%;
+
+background: linear-gradient(180deg,#5c2e85 -12.68%,#762b85 51.91%,#5c2e85 111.27%);
 border-radius: 0 0 20px 20px;
+position:relative;
+left:15%;
 
 
 `
@@ -33,6 +50,7 @@ flex-direction:column;
 justify-conent:center;
 align-items:center;
 box-sizing:border-box;
+
 position:relative;
 left:-5px;
 
@@ -173,6 +191,8 @@ const Register = (props)=>{
     
 
     return(
+
+        <PageContainer>
         <FormContainer>
             <StyledForm onSubmit={onSubmit}>
 
@@ -237,6 +257,7 @@ const Register = (props)=>{
             <div>{errs.password}</div>
             </StyledErrors>
         </FormContainer>
+        </PageContainer>
     )
 }
 

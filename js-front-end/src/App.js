@@ -8,6 +8,7 @@ import HomePage from './components/HomePage'
 import AllClasses from './components/AllClasses'
 import Search from './components/Search'
 import Nav from './components/Nav'
+import newClass from "./components/NewClassForm"
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
 			<Route exact path="/all" component={AllClasses} />
 			<Route exact path="/search" component={Search} />
 			<Route exact path="/login" component={Login} />
+			<Route exact path="/newClass" component={newClass} />
 			<ProtectedRoute exact path="/userinfo" component={GetUserInfo} />
 			<Route exact path='/register' component={Register}/>
 				

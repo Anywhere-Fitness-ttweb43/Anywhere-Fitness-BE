@@ -6,11 +6,23 @@ import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 
 
+const PageContainer=styled.div`
+width:60%;
+height:70vh;
+margin:auto;
+background: no-repeat url(https://www.wpxi.com/resizer/VwKKyZvgUAo78gGwj1gmR2MzU2M=/1200x675/arc-anglerfish-arc2-prod-cmg.s3.amazonaws.com/public/BQ6QRWWQSJBQNL6NQ3NQO367II.jpg);
+background-size:cover;
+background-color: gray;
+`
+
+
 const FormContainer= styled.div`
-width: 40%;
-margin: auto;
-background: purple;
+border: 5px solid gold;
+border-top:none;
+width: 70%;
+background: linear-gradient(180deg,#5c2e85 -12.68%,#762b85 51.91%,#5c2e85 111.27%);
 border-radius: 0 0 20px 20px;
+margin:auto;
 
 
 `
@@ -23,7 +35,7 @@ font-family:sans-serif;
 font-weight:600;
 font-size:1.2rem;
 justify-content:center;
-align-item:center;
+align-items:center;
 color: gold;`
 
 const StyledForm = styled.form`
@@ -31,9 +43,10 @@ const StyledForm = styled.form`
 padding:4rem;
 display:flex;
 flex-direction:column;
-justify-conent:center;
+justify-content:center;
 align-items:center;
 box-sizing:border-box;
+
 position:relative;
 left:-5px;
 
@@ -90,7 +103,7 @@ left:-5px;
     background: gold;
     color:purple;
     text-transform: uppercase;
-    leter-spacing:5px;
+    letter-spacing:5px;
     font-weight:800;
     cursor:pointer;
 
@@ -170,6 +183,8 @@ const Register = (props)=>{
     
 
     return(
+
+        <PageContainer>
         <FormContainer>
             <StyledForm onSubmit={onSubmit}>
 
@@ -224,6 +239,7 @@ const Register = (props)=>{
             <div>{errs.password}</div>
             </StyledErrors> */}
         </FormContainer>
+        </PageContainer>
     )
 }
 

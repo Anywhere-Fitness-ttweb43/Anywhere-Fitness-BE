@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { axiosWithAuth } from './axiosWithAuth'
@@ -55,6 +55,8 @@ const LogoDiv = styled.div`
 const Nav = (props) => {
     const history = useHistory()
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     const logout = () => {
         console.log('logout')
         axiosWithAuth().get('/logout')
@@ -62,24 +64,48 @@ const Nav = (props) => {
             console.log(res)
             localStorage.removeItem('token')
             history.push('/')
+            window.location.reload()
         })
         .catch((err) => {
             console.log({err})
         })
     }
 
+    useEffect(() => {
+        setIsLoggedIn(localStorage.getItem('token') ? true : false)
+    }, [])
+        
     return (
         <Header>
             <LogoDiv><Link to='/'><h2>Anywhere Fitness</h2></Link></LogoDiv>
             <StyledNav>
-                <div>
+                {/* <div>
                     <Link to='/all'>All Classes</Link>
                     <Link to='/login'>Log In</Link>
                     <Link to='/register'>Register</Link>
                 </div>
                 <div id='logout'>
                     <button onClick={logout}>Logout</button>
-                </div>
+                </div> */}
+
+                {
+                    isLoggedIn ?
+                    <>
+                        <div>
+                            <Link to='/all'>All Classes</Link>
+                        </div>
+                        <div id='logout'>
+                            <button onClick={logout}>Logout</button>
+                        </div>
+                    </> :
+                    <>
+                        <div>
+                            <Link to='/login'>Log In</Link>
+                            <Link to='/register'>Register</Link>
+                        </div>
+                    </>
+                }
+
             </StyledNav>
         </Header>
     )

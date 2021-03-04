@@ -84,6 +84,7 @@ const Nav = (props) => {
                     <>
                         <div>
                             <Link to='/all'>All Classes</Link>
+                            <Link to='/newClass'>New Class</Link>
                         </div>
                         <div id='logout'>
                             <button onClick={logout}>Logout</button>

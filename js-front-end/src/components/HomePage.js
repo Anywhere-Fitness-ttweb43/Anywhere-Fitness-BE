@@ -65,12 +65,17 @@ const HomePage = () => {
 
             <ImageContainer>
             <Main>
-                {/* random filler image */}
                 <Container className='image-and-title'>
                     <p>Fitness. Anytime. Anywhere.</p>
                     <div>
-                        <Link to='/all'>All Classes</Link>
-                        <Link to='/search'>Search</Link>
+                        {
+                            localStorage.getItem('token') ?
+                            <>
+                            <Link to='/all'>All Classes</Link>
+                            <Link to='/search'>Search</Link>
+                            </> :
+                            <Link to='/login'>Login</Link>
+                        }
                     </div>
                 </Container>
                 

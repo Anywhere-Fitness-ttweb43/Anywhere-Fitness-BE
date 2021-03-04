@@ -81,6 +81,7 @@ const Login = (props) => {
 				console.log(res.data);
 				localStorage.setItem("token", res.data.access_token);
 				props.history.push("/all");
+				window.location.reload();
 			});
 		console.log(credentials)
 	};
@@ -101,7 +102,7 @@ const Login = (props) => {
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 
-		// validateLogin(name, value);
+		validateLogin(name, value);
 		setCredentials({
 			...credentials,
 			[name]: value,

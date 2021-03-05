@@ -11,7 +11,7 @@ const registerSchema = Yup.object().shape({
         "role": Yup.object().shape({
             "roleid": Yup.string().required().oneOf(['1','2'],'Must select an option')
         })
-    })),
+    }), "please select one"),
     "password": Yup.string()
                 .required('Password field is required')
                 .min(8,'Password must be at least 8 character'),

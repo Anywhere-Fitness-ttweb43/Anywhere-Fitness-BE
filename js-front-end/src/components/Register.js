@@ -135,17 +135,13 @@ const Register = (props)=>{
         "username": "",
         "password": "",
         "primaryemail": "",
-        "roles": [
-            {
-                "role": {
-                    "roleid": ''
-                }
-            }]
+        "roles": '',
         }
 
     const [formCreds,setFormCreds]=useState(initialCreds)
     const [errs,setErrs]=useState(initialErrs)
     const [disabled, setDisabled]= useState(true)
+    const [selectErr,setSelectErr]= useState('')
 
     const onChange = (e)=>{
         const{name,value,type}=e.target
@@ -185,6 +181,8 @@ const Register = (props)=>{
             console.log(valid)
             setDisabled(!valid)
         })
+
+     formCreds.roles[0].role.roleid===''? setSelectErr("Please select an option from the dropdown"): setSelectErr('')
 
     },[formCreds])
     
@@ -242,7 +240,7 @@ const Register = (props)=>{
                 <div>{errs.username}</div>
                 <div>{errs.password}</div>
                 <div>{errs.primaryemail}</div>
-                <div>{errs.roles.message}</div>
+                <div>{selectErr}</div>
             </StyledErrors>
             
         </FormContainer>

@@ -1,9 +1,10 @@
 //worked on by Anas Abdelsalam
 import React, {useState, useEffect} from "react";
 import * as yup from "yup";
-import axios from "axios";
+import {axiosWithAuth} from "./axiosWithAuth";
 import classSchema from "../validation/classSchema"
 import styled from 'styled-components'
+
 
 const theDate = new Date();
 const initialNewClass = {
@@ -15,7 +16,6 @@ const initialNewClass = {
     intensity: "", 
     location: "",
     // cSize: 0, for current size of class (unused)
-    mSize: 0,
 };
 
 const initialNewClassErrors = {
@@ -27,7 +27,6 @@ const initialNewClassErrors = {
     intensity: "",
     location: "",
     // cSize: "", current size of class (unused)
-    mSize: "",
 };
 
 const initialDisabled = true;
@@ -166,12 +165,13 @@ export default function NewClass(props){
     };
 
     const postNewClass = (newClass) => {
-        axios.post("https://reqres.in/api/users", newClass)
+        console.log(newClass)
+        axiosWithAuth().post("/classes/class", newClass)
             .then((res)=>{
                 console.log(res)
             })
             .catch((err)=>{
-                console.log(err)
+                console.log({err})
             })
     };
 
@@ -185,6 +185,16 @@ export default function NewClass(props){
                 /intensity
                 /location  
             */
+
+        
+            "name": newClass.name,
+            "time": newClass.sTime,
+            "date": formattingDate(newClass.date),
+            "duration": newClass.duration,
+            "type": newClass.type,
+            "intensity": newClass.intensity,
+            "location": newClass.location
+        
         }
         postNewClass(shapedNewClass)
         setNewClass(initialNewClass)
@@ -218,7 +228,7 @@ export default function NewClass(props){
                     <div>{newClassErrors.name}</div>
                     <div>{newClassErrors.duration}</div>
                     <div>{newClassErrors.intensity}</div>
-                    <div>{newClassErrors.mSize}</div>
+                    {/* <div>{newClassErrors.mSize}</div> */}
                     <div>{newClassErrors.sTime}</div>
                     <div>{newClassErrors.type}</div>
                     <div>{newClassErrors.location}</div>
@@ -247,20 +257,28 @@ export default function NewClass(props){
                 <label>Intensity: 
                     <select value={newClass.intensity} name="intensity" onChange={onChange}>
                         <option value="">---Intensity---</option>
-                        <option value="High">High</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Low">Low</option>
+                        <option value="10">10</option>
+                        <option value="9">9</option>
+                        <option value="8">8</option>
+                        <option value="7">7</option>
+                        <option value="6">6</option>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                        <option value="0">0</option>
                     </select>
                 </label>
 
-                <label>Max Class Size: 
+                {/* <label>Max Class Size: 
                     <input 
                         type="number"
                         name="mSize"
                         onChange={onChange}
                         value={newClass.mSize}
                     />
-                </label>
+                </label> */}
 
                 <label>Start Time: 
                     <select value={newClass.sTime} name="sTime" onChange={onChange}>
@@ -300,7 +318,7 @@ export default function NewClass(props){
                     />
                 </label>
 
-                <button disabled={isDisabled} id="submit">SUBMIT</button>
+                <button disabled={isDisabled}  id="submit">SUBMIT</button>
             </STForm>
         </STFormContain>
     )

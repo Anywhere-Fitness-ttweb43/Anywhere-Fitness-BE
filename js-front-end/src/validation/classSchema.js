@@ -28,11 +28,6 @@ const classSchema = yup.object().shape({
 
     location: yup.string()
         .required("Location is a required field"),
-        
-    mSize: yup.number()
-        .required("Max Class Size is a required field")
-        .min(5,"Minimum Class Size is 5"),
-    
 
 })
 

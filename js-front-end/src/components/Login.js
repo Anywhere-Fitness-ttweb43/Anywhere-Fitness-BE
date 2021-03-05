@@ -81,7 +81,6 @@ const Login = (props) => {
 				console.log(res.data);
 				localStorage.setItem("token", res.data.access_token);
 				props.history.push("/all");
-				window.location.reload();
 			});
 		console.log(credentials)
 	};

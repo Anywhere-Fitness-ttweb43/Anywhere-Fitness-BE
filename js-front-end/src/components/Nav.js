@@ -64,7 +64,6 @@ const Nav = (props) => {
             console.log(res)
             localStorage.removeItem('token')
             history.push('/')
-            window.location.reload()
         })
         .catch((err) => {
             console.log({err})
@@ -79,25 +78,17 @@ const Nav = (props) => {
         <Header>
             <LogoDiv><Link to='/'><h2>Anywhere Fitness</h2></Link></LogoDiv>
             <StyledNav>
-                {
-                    isLoggedIn ?
-                    <>
-                        <div>
-                            <Link to='/all'>All Classes</Link>
-                            <Link to='/newClass'>New Class</Link>
-                        </div>
-                        <div id='logout'>
-                            <button onClick={logout}>Logout</button>
-                        </div>
-                    </> :
-                    <>
-                        <div>
-                            <Link to='/login'>Log In</Link>
-                            <Link to='/register'>Register</Link>
-                        </div>
-                    </>
-                }
-
+                <div>
+                    <Link to='/all'>All Classes</Link>
+                    <Link to='/newClass'>New Class</Link>
+                </div>
+                <div>
+                    <Link to='/login'>Log In</Link>
+                    <Link to='/register'>Register</Link>
+                </div>
+                <div id='logout'>
+                    <button onClick={logout}>Logout</button>
+                </div>
             </StyledNav>
         </Header>
     )

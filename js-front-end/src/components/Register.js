@@ -113,10 +113,6 @@ left:-5px;
 }
 }
 
-
-
-
-
 `
 
 const Register = (props)=>{
@@ -130,30 +126,41 @@ const Register = (props)=>{
         "roles": [
             {
                 "role": {
-                    "roleid": 1
+                    "roleid": ''
                 }
             }]
         }
 
-    // const initialErrs={
-    //     fname:'',
-    //     lname:'',
-    //     usertype:'',
-    //     email:'',
-    //     password:'',
-    // }
+     const initialErrs={
+        "username": "",
+        "password": "",
+        "primaryemail": "",
+        "roles": [
+            {
+                "role": {
+                    "roleid": ''
+                }
+            }]
+        }
 
     const [formCreds,setFormCreds]=useState(initialCreds)
-    // const [errs,setErrs]=useState(initialErrs)
+    const [errs,setErrs]=useState(initialErrs)
     const [disabled, setDisabled]= useState(true)
 
     const onChange = (e)=>{
-        const{name,value}=e.target
-        // Yup.reach(registerSchema,name)
-        //     .validate(value)
-        //     .then(()=> setErrs({...errs, [name]:''}))
-        //     .catch(err=>setErrs({...errs, [name]:err.errors[0]}))
-        setFormCreds({...formCreds,[name]:value})
+        const{name,value,type}=e.target
+        //console.dir(e.target)
+        
+         Yup.reach(registerSchema,name)
+             .validate(value)
+             .then(()=> setErrs({...errs, [name]:''}))
+             .catch(err=>{
+                 console.log({roles:err})
+                setErrs({...errs, [name]:err.errors[0]})
+             })
+        type==='select-one'?setFormCreds({...formCreds, [name]: [{"role": {"roleid": value}}]}) : setFormCreds({...formCreds,[name]:value})
+        
+        console.log(formCreds)
        // console.dir(e.target)
 
     }
@@ -173,13 +180,13 @@ const Register = (props)=>{
         })
     }
 
-    // useEffect(()=>{
+    useEffect(()=>{
+        registerSchema.isValid(formCreds).then(valid=>{
+            console.log(valid)
+            setDisabled(!valid)
+        })
 
-    //     registerSchema.isValid(formCreds).then(valid=>setDisabled(!valid))
-
-    // },[formCreds])
-
-
+    },[formCreds])
     
 
     return(
@@ -197,7 +204,7 @@ const Register = (props)=>{
                     /></label>
 
                 <label>
-                    <select name='usertype' value={formCreds.roles[0].role.roleid} onChange={onChange}>
+                    <select name='roles' value={formCreds.roles[0].role.roleid} onChange={onChange}>
                         <option value=''>----Select One----</option>
                         <option value='1'>Instructor</option>
                         <option value='2'>Student</option>
@@ -224,21 +231,22 @@ const Register = (props)=>{
                     />
                 </label>
 
-                <button >Register</button>
+                <button disabled={disabled}>Register</button>
 
 
 
 
             </StyledForm>
 
-            {/* <StyledErrors>
-            <div>{errs.fname}</div>
-            <div>{errs.lname}</div>
-            <div>{errs.usertype}</div>
-            <div>{errs.email}</div>
-            <div>{errs.password}</div>
-            </StyledErrors> */}
+            <StyledErrors>
+                <div>{errs.username}</div>
+                <div>{errs.password}</div>
+                <div>{errs.primaryemail}</div>
+                <div>{errs.roles.message}</div>
+            </StyledErrors>
+            
         </FormContainer>
+        
         </PageContainer>
     )
 }
